@@ -9,8 +9,9 @@
 
 ### 祝大家玩的开心~
 
-![image](https://github.com/ShaderFallback/CpuRamGet/tree/main/Image/成品展示1.jpg)
-![image](https://github.com/ShaderFallback/CpuRamGet/tree/main/Image/成品展示2.jpg)
-![image](https://github.com/ShaderFallback/CpuRamGet/tree/main/Image/接线图.jpg)
-![image](https://github.com/ShaderFallback/CpuRamGet/tree/main/Image/硬件清单.jpg)
-![image](https://github.com/ShaderFallback/CpuRamGet/tree/main/Image/组装细节.jpg)
+
+![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/成品展示1.jpg)
+![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/成品展示2.jpg)
+![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/接线图.jpg)
+![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/硬件清单.jpg)
+![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/组装细节.jpg)
