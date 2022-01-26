@@ -25,7 +25,7 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("输入的配置项不正确!\n");
                 Console.WriteLine("右键CpuRamGet.exe -> 创建快捷方式 -> 快捷方式右键属性 -> 目标 -> CpuRamGet.exe 尾部依照下列说明添加\n");
-                Console.WriteLine("1.IP  2.端口号  2.电压表最大值(3.3V以内)  3.刷新时间(单位毫秒) 每项中间空格区分\n \n例: 192.168.1.199 2333 1 500");
+                Console.WriteLine("1.IP  2.端口号  3.电压表最大值(3.3V以内)  4.刷新时间(单位毫秒) 每项中间空格区分\n \n例: 192.168.1.199 2333 1 500");
                 Console.ReadKey();
                 return;
             }
