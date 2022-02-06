@@ -1,0 +1,7 @@
+{
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": ["--style={column_limit=128}"],
+    "python.linting.flake8Args": ["--max-line-length=248", "--ignore=W191, E266, W504"],
+    "python.linting.pylintEnabled": false
+}
