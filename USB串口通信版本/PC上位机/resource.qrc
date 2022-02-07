@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+        <file>imgs/brightness.png</file>
+        <file>imgs/check.png</file>
+        <file>imgs/checked.png</file>
+        <file>imgs/link.png</file>
+        <file>imgs/icon.png</file>
+    </qresource>
+</RCC>
+<!-- 根目录执行 pyrcc5 resource.qrc -o resource.py  来生成和更新resource.py文件-->
