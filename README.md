@@ -12,6 +12,6 @@
 
 ![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/成品展示1.jpg)
 ![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/成品展示2.jpg)
-![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/接线图.jpg)
+![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/接线图.png)
 ![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/硬件清单.jpg)
 ![image](https://github.com/ShaderFallback/CpuRamGet/blob/main/Image/组装细节.jpg)
