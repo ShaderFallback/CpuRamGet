@@ -5,7 +5,7 @@
 - **4.esp32 固件采用MicroPython,请去官网下载最新**
 - **5.IDE 推荐使用 thonny 刷机 or 下载程序**
 - **.有任何疑问欢迎在视频下留言**
-[www.bilibili.com/video/BV1jL4y1x7gx](www.bilibili.com/video/BV1jL4y1x7gx)
+[www.bilibili.com/video/BV1jL4y1x7gx](https://www.bilibili.com/video/BV1jL4y1x7gx)
 
 ### 祝大家玩的开心~
 
