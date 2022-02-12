@@ -188,7 +188,7 @@ class Thread_PORT_TRANS(QThread):
                 message = "0,0"
                 while True:
                     message = str(round(psutil.cpu_percent(0))) + "," + (str)(round(psutil.virtual_memory().percent))
-                    logging.info(message)
+                    logging.info("send:" + message)
                     time.sleep(1)
                     arduino.write(bytes(message, 'utf-8'))
                     time.sleep(1)
