@@ -18,10 +18,8 @@
 由于基于串口通信，不依赖wifi。理论上下位机可以替换成arduino uno等单片机。  
 但同样因为PWM的原因arduino与esp32写法存在差异，目前下位机代码只能在esp32上运行。
 
-下一步再提供arduino uno版本。
-
 ## 开发指南
-### 上位机
+### 1.上位机
 上位机采用python开发，图形库为pyqt5。开发IDE为vscode。
 #### 启动
 1. `cd USB串口通信版本/PC上位机` 进入上位机文件夹
@@ -51,11 +49,14 @@ pyinstaller -F main.py -i ./icon.ico --noconsole
 ie4uinit.exe -show
 ```
 
-### 下位机
+### 2.下位机
 通过串口接受到数据，下位机采用PWM的方式控制电压表，由于没有使用Wifi传输  
 数据，这使得我们可以使用arduino uno等开发板。下位机文件夹里提供了esp32和  
 arduino的不同实现。  
 
 核心区别就是esp32使用了`ledcWrite`而arduino uno使用的是`analogWrite`函数。
 
+#### 串口驱动
+貌似有些电脑需要安装esp32 所用的串口驱动才能运行。  
+(驱动)[https://ftdichip.com/drivers/vcp-drivers/]
 
