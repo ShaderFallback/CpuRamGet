@@ -25,7 +25,7 @@ def do_connect():
         wlan.active(True)
         if not wlan.isconnected():
             print('connecting to network...')
-            wlan.connect('这里填写Wifi名', '这里填写Wifi密码')
+            wlan.connect('你的Wifi账号', '密码')
             while not wlan.isconnected():#没有返回True将循环等待
                 pass
         print('network config:', wlan.ifconfig())
@@ -44,9 +44,9 @@ def dacThread( threadName, delay):
         i += 0.01
         ramlerp = lerp(ramlerp,ram_value,i)
         dac25.write(int(ramlerp))
-        if(i >= 1.0):
+        if(ramlerp >= ram_value):
             i = 0.0
-        #time.sleep(0.5)
+        time.sleep(0.015)
         
         
 def dacThread2( threadName, delay):
@@ -57,9 +57,9 @@ def dacThread2( threadName, delay):
         i += 0.01
         cpulerp = lerp(cpulerp,cpu_value,i)
         dac26.write(int(cpulerp))
-        if(i >= 1.0):
+        if(cpulerp >= cpu_value):
             i = 0.0
-        #time.sleep(0.5)
+        time.sleep(0.015)
         
 def dacThread3( threadName, delay):
     global ram_value
@@ -107,4 +107,5 @@ s.bind((addressIp[0], port))
 _thread.start_new_thread( dacThread, ("Thread_1", 1, ) )
 _thread.start_new_thread( dacThread2, ("Thread_2", 2, ) )
 _thread.start_new_thread( dacThread3, ("Thread_3", 3, ) )
+
 
