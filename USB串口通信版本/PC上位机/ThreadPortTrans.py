@@ -26,7 +26,7 @@ class Thread_PORT_TRANS(QThread):
         while True:
             try:
                 # 握手成功后 进行通信
-                arduino = serial.Serial(self.targetPort, baudrate=115200, timeout=0.5)
+                arduino = serial.Serial(self.targetPort, baudrate=115200, timeout=1)
                 message = "0,0"
                 while True:
                     self.my_signal.emit(True)

@@ -34,10 +34,10 @@ class Thread_GET_TARGET_PORT_AUTO(QThread):
         i = 0
         while i < 3:
             arduino.write(bytes(self.handshakeStr, 'utf-8'))
-            logging.debug("handshake response:" + arduino.readline().decode())
+            response = arduino.readline().decode()
             time.sleep(1)
             i = i + 1
-        return arduino.readline()
+        return response
 
     def getTargetPort(self):
         # 获取所有串口
@@ -45,17 +45,20 @@ class Thread_GET_TARGET_PORT_AUTO(QThread):
         if len(portList) > 0:
             # 遍历所有串口
             for port in portList:
+                logging.debug(port)
                 try:
                     # 波特率默认使用115200，超时0.5秒
-                    arduino = serial.Serial(port.name, baudrate=115200, timeout=0.5)
-                    data = self.handshake(arduino)
-                    logging.info(data.decode())
+                    arduino = serial.Serial(port.name, baudrate=115200, timeout=1)
+                    response = self.handshake(arduino)
+                    logging.info(response)
                     # 串口握手校验
-                    if data.decode().strip() == self.handshakeStr:
+                    if response.strip() == self.handshakeStr:
                         self.my_signal.emit([port.name + "(已连接)", port.name])
                         self.target_port = port.name
                         arduino.close()
+                        time.sleep(0.5)
                         logging.debug(port.name + " is usable")
+                        break
                     else:
                         logging.debug(port.name + " can not use")
                 except Exception:
