@@ -262,6 +262,13 @@ namespace ConsoleApp1
 
         static void Init()
         {
+            //初始化OpenHardwareMonitorLib
+            computer = new Computer();
+            computer.CPUEnabled = true;
+            computer.RAMEnabled = true;
+            computer.GPUEnabled = true;
+            computer.Open();
+
             if (isWiredWireless)
             {
                 serialPort.PortName = serialPortIndex;//串口号
@@ -273,6 +280,7 @@ namespace ConsoleApp1
                 }
                 catch (Exception _exception)
                 {
+                    serialPort.Close();
                     Console.WriteLine(_exception.Message);
                 }
             }
@@ -287,33 +295,26 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine(_exception.Message);
                 }
-
             }
-
-            //获取Cpu,Gpu使用率温度等
-            computer = new Computer();
-            computer.CPUEnabled = true;
-            computer.RAMEnabled = true;
-            computer.GPUEnabled = true;
-            computer.Open();
+            
         }
 
         static void UpdateReceive()
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     String input = serialPort.ReadLine();
                     Console.WriteLine("回读数据:" + input);
                     System.Threading.Thread.Sleep(0);
                 }
+                catch
+                {
+                    Console.WriteLine("回读失败"); 
+                }
+                System.Threading.Thread.Sleep(200);
             }
-            catch (Exception _exception)
-            {
-                Console.WriteLine(_exception); 
-            }
-           
         }
 
         static void Esp32Connected(string message)
@@ -328,7 +329,16 @@ namespace ConsoleApp1
                 }
                 else
                 {
+                    serialPort.Close();
                     Console.WriteLine("出错啦! 串口: {0} 无法打开,请检查!", serialPortIndex);
+                    try
+                    {
+                        serialPort.Open();
+                    }
+                    catch (Exception _exception)
+                    {
+                        Console.WriteLine(_exception.Message);
+                    }
                 }
             }
             else
