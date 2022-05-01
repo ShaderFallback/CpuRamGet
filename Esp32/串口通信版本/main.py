@@ -76,12 +76,11 @@ _thread.start_new_thread( dacThread2, ("Thread_2", 2, ) )
 
 while(True):
     try:
-        readInfo = sys.stdin.read(5)
-        array_value =  readInfo.split(",")
+        readInfo = sys.stdin.read(8)
+        print(str(readInfo))
+        array_value =  readInfo.split(".")[0].split(",")
         cpu_value = int(array_value[1])
         ram_value = int(array_value[0])
-        print(cpu_value)
-        print(ram_value)
         time.sleep(0.1)
     except:
         #print(getTime()+" 连接断开...")

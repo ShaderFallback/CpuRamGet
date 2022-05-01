@@ -39,7 +39,6 @@ namespace ConsoleApp1
         static string serialPortIndex = "";
         static int baudRateValue = 115200;
 
-
         static void Main(string[] args)
         {
            
@@ -303,17 +302,15 @@ namespace ConsoleApp1
         {
             while (true)
             {
+                System.Threading.Thread.Sleep(updateTime);
                 try
                 {
-                    String input = serialPort.ReadLine();
-                    Console.WriteLine("回读数据:" + input);
-                    System.Threading.Thread.Sleep(0);
+                    Console.WriteLine("回读数据:\n" + serialPort.ReadTo("."));
                 }
                 catch
                 {
                     Console.WriteLine("回读失败"); 
                 }
-                System.Threading.Thread.Sleep(200);
             }
         }
 
@@ -323,8 +320,7 @@ namespace ConsoleApp1
             {
                 if(serialPort.IsOpen)
                 {
-                    //serialPort.WriteLine(message);
-                    serialPort.Write(message);
+                    serialPort.Write(message + ".");//添加截至标记使读取的数据完整
                     Console.WriteLine("串口号: {0} 波特率: {1} 发送信息: {2}", serialPortIndex, baudRateValue, message);
                 }
                 else
