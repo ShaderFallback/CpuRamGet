@@ -305,11 +305,12 @@ namespace ConsoleApp1
                 System.Threading.Thread.Sleep(updateTime);
                 try
                 {
-                    Console.WriteLine("回读数据:\n" + serialPort.ReadTo("."));
+                    string _readStr = serialPort.ReadTo(".").Replace("\r","").Replace("\n", "");
+                    Console.WriteLine("回读数据:{0}", _readStr);
                 }
                 catch
                 {
-                    Console.WriteLine("回读失败"); 
+                    Console.WriteLine("回读失败");
                 }
             }
         }
