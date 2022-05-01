@@ -8,6 +8,7 @@ using System.Net;
 using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Collections;
 
 namespace ConsoleApp1
 {
@@ -37,6 +38,7 @@ namespace ConsoleApp1
         static bool isWiredWireless = false;
         static string serialPortIndex = "";
         static int baudRateValue = 115200;
+
 
         static void Main(string[] args)
         {
@@ -78,6 +80,9 @@ namespace ConsoleApp1
             Init();
             Thread thread = new Thread(SetEsp32);
             thread.Start();
+            Thread thread2 = new Thread(UpdateReceive);
+            thread2.Start();
+
         }
 
         static double RamapValue(double Value, double Low1Val, double High1Val, double Low2Val, double High2Val)
@@ -206,9 +211,7 @@ namespace ConsoleApp1
                 Console.WriteLine("===================bilibili日出东水===================\n");
                 Console.WriteLine("ID_1  CPU 使用率: {0} %\n", cpuLoad);
                 Console.WriteLine("ID_2  CPU 温度: {0} C\n", cpuTemperature);
-
                 Console.WriteLine("ID_3  内存使用率: {0} %\n", ramLoad);
-
                 Console.WriteLine("ID_4  GPU 使用率: {0} %\n", gpuLoad);
                 Console.WriteLine("ID_5  GPU 显存占用: {0} %\n", gpuRamLoad);
                 Console.WriteLine("ID_6  GPU 温度: {0}  C\n", gpuTemperature);
@@ -221,8 +224,9 @@ namespace ConsoleApp1
 
                 Console.WriteLine("配置的数据类型: [{0}] / [{1}] \n",_sendType_1,_sendType_2);
 
-                string sendStr1 = Convert.ToString(Math.Round(RamapValue(_sendValue_1, 0, 100.0, 0, useVoltage), 0));
-                string sendStr2 = Convert.ToString(Math.Round(RamapValue(_sendValue_2, 0, 100.0, 0, useVoltage), 0));
+                string sendStr1 = Math.Round(RamapValue(_sendValue_1, 0.0, 99.0, 0.0, useVoltage), 0).ToString("00");
+                string sendStr2 = Math.Round(RamapValue(_sendValue_2, 0.0, 99.0, 0.0, useVoltage), 0).ToString("00");
+
                 Esp32Connected(sendStr2 + "," + sendStr1);
                 Console.WriteLine("\n----------------OpenHardwareMonitor------------------");
                 System.Threading.Thread.Sleep(updateTime);
@@ -294,13 +298,32 @@ namespace ConsoleApp1
             computer.Open();
         }
 
+        static void UpdateReceive()
+        {
+            try
+            {
+                while (true)
+                {
+                    String input = serialPort.ReadLine();
+                    Console.WriteLine("回读数据:" + input);
+                    System.Threading.Thread.Sleep(0);
+                }
+            }
+            catch (Exception _exception)
+            {
+                Console.WriteLine(_exception); 
+            }
+           
+        }
+
         static void Esp32Connected(string message)
         {
             if (isWiredWireless)
             {
                 if(serialPort.IsOpen)
                 {
-                    serialPort.WriteLine(message);
+                    //serialPort.WriteLine(message);
+                    serialPort.Write(message);
                     Console.WriteLine("串口号: {0} 波特率: {1} 发送信息: {2}", serialPortIndex, baudRateValue, message);
                 }
                 else
