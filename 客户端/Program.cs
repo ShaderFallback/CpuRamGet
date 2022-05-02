@@ -38,6 +38,7 @@ namespace ConsoleApp1
         static bool isWiredWireless = false;
         static string serialPortIndex = "";
         static int baudRateValue = 115200;
+        static string esp32ReadString = "";
 
         static void Main(string[] args)
         {
@@ -207,27 +208,27 @@ namespace ConsoleApp1
                 gpuRamLoad = Math.Round(gpuRamLoad, 0);
                 gpuTemperature = Math.Round(gpuTemperature, 0);
 
-                Console.WriteLine("===================bilibili日出东水===================\n");
-                Console.WriteLine("ID_1  CPU 使用率: {0} %\n", cpuLoad);
-                Console.WriteLine("ID_2  CPU 温度: {0} C\n", cpuTemperature);
-                Console.WriteLine("ID_3  内存使用率: {0} %\n", ramLoad);
-                Console.WriteLine("ID_4  GPU 使用率: {0} %\n", gpuLoad);
-                Console.WriteLine("ID_5  GPU 显存占用: {0} %\n", gpuRamLoad);
-                Console.WriteLine("ID_6  GPU 温度: {0}  C\n", gpuTemperature);
-
                 //dac的数值范围为0-255,实际输出电压值为0-3.3v
                 string _sendType_1;
                 string _sendType_2;
-                double _sendValue_1 =  SwitchSendValue(sendValueID_1, out _sendType_1);
+                double _sendValue_1 = SwitchSendValue(sendValueID_1, out _sendType_1);
                 double _sendValue_2 = SwitchSendValue(sendValueID_2, out _sendType_2);
-
-                Console.WriteLine("配置的数据类型: [{0}] / [{1}] \n",_sendType_1,_sendType_2);
 
                 string sendStr1 = Math.Round(RamapValue(_sendValue_1, 0.0, 99.0, 0.0, useVoltage), 0).ToString("00");
                 string sendStr2 = Math.Round(RamapValue(_sendValue_2, 0.0, 99.0, 0.0, useVoltage), 0).ToString("00");
 
-                Esp32Connected(sendStr2 + "," + sendStr1);
-                Console.WriteLine("\n----------------OpenHardwareMonitor------------------");
+                string writeLine = "\n===================bilibili日出东水===================\n" +
+                                    "\nID_1  CPU 使用率: " + cpuLoad.ToString() + " %\n" +
+                                    "\nID_2  CPU 温度: " + cpuTemperature.ToString() + " C\n" +
+                                    "\nID_3  内存使用率:: " + ramLoad.ToString() + " %\n" +
+                                    "\nID_4  GPU 使用率: " + gpuLoad.ToString() + " %\n" +
+                                    "\nID_5  GPU 显存占用: " + gpuRamLoad.ToString() + " %\n"+
+                                    "\nID_6  GPU 温度: " + gpuTemperature.ToString() + " C\n"+
+                                    "\n配置的数据类型: [" + _sendType_1.ToString() + "] / ["+ _sendType_2.ToString() + "] \n"+
+                                    "\n----------------OpenHardwareMonitor------------------\n";
+                Console.WriteLine(writeLine);
+                Esp32Connected(sendStr2.ToString() + "," + sendStr1.ToString());
+
                 System.Threading.Thread.Sleep(updateTime);
             }
         }
@@ -305,8 +306,8 @@ namespace ConsoleApp1
                 System.Threading.Thread.Sleep(updateTime);
                 try
                 {
-                    string _readStr = serialPort.ReadTo(".").Replace("\r","").Replace("\n", "");
-                    Console.WriteLine("回读数据:{0}", _readStr);
+                    esp32ReadString = serialPort.ReadTo(".").Replace("\r","").Replace("\n", "");
+                    //string[] _readStrArray = _readStr.Split(',');
                 }
                 catch
                 {
@@ -322,7 +323,7 @@ namespace ConsoleApp1
                 if(serialPort.IsOpen)
                 {
                     serialPort.Write(message + ".");//添加截至标记使读取的数据完整
-                    Console.WriteLine("串口号: {0} 波特率: {1} 发送信息: {2}", serialPortIndex, baudRateValue, message);
+                    Console.WriteLine("串口号: {0} 波特率: {1} 发送信息: {2} \n\n>>回读数据: {3}", serialPortIndex, baudRateValue, message, esp32ReadString);
                 }
                 else
                 {
