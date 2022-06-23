@@ -106,7 +106,7 @@ namespace ConsoleApp1
                         {
                             if (sensor.SensorType == SensorType.Load)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     if (sensor.Index == 0) //总占用率
                                     {
@@ -116,7 +116,7 @@ namespace ConsoleApp1
                             }
                             if (sensor.SensorType == SensorType.Temperature)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     if (sensor.Index == 0)
                                     {
@@ -132,7 +132,7 @@ namespace ConsoleApp1
                         {
                             if (sensor.SensorType == SensorType.Load)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     ramLoad = (double)sensor.Value;
                                 }
@@ -145,7 +145,7 @@ namespace ConsoleApp1
                         {
                             if (sensor.SensorType == SensorType.Load)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     if (sensor.Index == 0) //总占用率
                                     {
@@ -159,7 +159,7 @@ namespace ConsoleApp1
                             }
                             if (sensor.SensorType == SensorType.Temperature)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     if (sensor.Index == 0) //Gpu温度
                                     {
@@ -175,7 +175,7 @@ namespace ConsoleApp1
                         {
                             if (sensor.SensorType == SensorType.Load)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     if (sensor.Index == 0) //总占用率
                                     {
@@ -189,7 +189,7 @@ namespace ConsoleApp1
                             }
                             if (sensor.SensorType == SensorType.Temperature)
                             {
-                                if (sensor != null)
+                                if (sensor != null && sensor.Value != null)
                                 {
                                     if (sensor.Index == 0) //总占用率
                                     {
