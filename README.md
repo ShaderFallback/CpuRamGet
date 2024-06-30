@@ -1,3 +1,29 @@
+## PC Status Physical Monitoring Table
+
+- **1. All materials are not for commercial use; please credit the source when sharing [Hyperlink]**
+- **2. The copyright of the dial images belongs to the original author**
+- **3. Adjust the size of the 3D print model according to the slicer software's units (the units used during creation are centimeters). It is recommended to use KT board to make the shell, as it is more cost-effective**
+    (Note: If using this 3D model to print the shell, you need to purchase a development board without soldered headers to fit it in)
+- **4. Use 300 DPI when creating the dial, and make sure to set 300 DPI when printing. Arrange the layout according to the printer's print size**
+- **5. The voltmeter model in the video is 91C4. The maximum voltage range should be less than 3.3V**
+- **6. The esp32 firmware uses MicroPython; please download the latest version from the official website**
+- **7. Before downloading the program, remember to modify the WiFi name and password in main.py. If the port does not conflict, keep the default 4999. No changes are needed for the serial version**
+- **8. Thonny IDE is recommended for flashing the firmware or downloading the program**
+- **9. You can use Windows <Task Scheduler> to run the program automatically on startup**
+- **10. Create a basic task -> Set the trigger to "At startup" -> Start a program -> Browse to CpuRamGet.exe, and add parameters**
+    (By default, the "console program" started by Task Scheduler will run in the background. Remember to uncheck "Stop the task if it runs longer than 3 days" in the settings and check "Run with highest privileges")
+- **Configurable parameter IDs (select 2 out of 6): 1 CPU Usage, 2 CPU Temperature, 3 Memory Usage, 4 GPU Usage, 5 GPU Memory Usage, 6 GPU Temperature**
+- **11. Download the CP210x Windows Drivers for the Esp32 USB development board serial driver** [CP210x Windows Drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)
+
+- **. New USB serial communication support, no WiFi configuration needed**
+  Go to My Computer -> Device Manager -> Ports to see your development board's port number. Use a baud rate of 115200
+  USB serial example: com4 115200 1 500 1 2
+
+- **. If you have any questions, feel free to leave a comment under the video**
+  [https://www.youtube.com/watch?v=8Lh_D1dhlAI](https://www.youtube.com/watch?v=8Lh_D1dhlAI)
+
+### Have fun, everyone!
+
 ## PC 状态物理监控表
 - **1.全部资料请勿用作商业用途,转载请注明出处[超连接]**
 - **2.表盘图片版权归原作者所有**
@@ -18,16 +44,13 @@
 我的电脑属性-> 设备管理器 -> 端口 -> 查看你开发板的端口号,波特率使用115200
 USB串口示例: com4 115200 1 500 1 2
 
-
 - **.有任何疑问欢迎在视频下留言**
 [www.bilibili.com/video/BV1jL4y1x7gx](https://www.bilibili.com/video/BV1jL4y1x7gx)
 
-- **.感谢【大肠杆君的日常】,贡献的图形化客户端**
+- **.搜集的其他网友的实现**
+https://github.com/gitsang/loadoutput
 [https://space.bilibili.com/3490242](https://space.bilibili.com/3490242)
 [https://github.com/hanchengxu](https://github.com/hanchengxu)
-
-- **.留言区搜集的其他网友的实现**
-https://github.com/gitsang/loadoutput
 
 ### 祝大家玩的开心~
 
