@@ -5,10 +5,10 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Text;
 using System.Net;
-using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Collections;
+using LibreHardwareMonitor.Hardware;
 
 namespace ConsoleApp1
 {
@@ -100,7 +100,7 @@ namespace ConsoleApp1
                 {
                     hardware.Update();
 
-                    if (hardware.HardwareType == HardwareType.CPU)
+                    if (hardware.HardwareType == HardwareType.Cpu)
                     {
                         foreach (var sensor in hardware.Sensors)
                         {
@@ -108,17 +108,21 @@ namespace ConsoleApp1
                             {
                                 if (sensor != null && sensor.Value != null)
                                 {
-                                    if (sensor.Index == 0) //总占用率
+                                    if (sensor.Name.Contains("Total"))
                                     {
+                                        //总占用率
                                         cpuLoad = (double)sensor.Value;
                                     }
                                 }
                             }
+
                             if (sensor.SensorType == SensorType.Temperature)
                             {
                                 if (sensor != null && sensor.Value != null)
                                 {
-                                    if (sensor.Index == 0)
+                                    //显示平均温度
+                                    //不同CPU返回的Name不同
+                                    if (sensor.Name.Contains("Average"))
                                     {
                                         cpuTemperature = (double)sensor.Value;
                                     }
@@ -126,7 +130,7 @@ namespace ConsoleApp1
                             }
                         }
                     }
-                    else if (hardware.HardwareType == HardwareType.RAM)
+                    else if (hardware.HardwareType == HardwareType.Memory)
                     {
                         foreach (var sensor in hardware.Sensors)
                         {
@@ -139,7 +143,7 @@ namespace ConsoleApp1
                             }
                         }
                     } //没有此显卡为空
-                    else if (hardware.HardwareType == HardwareType.GpuAti)
+                    else if (hardware.HardwareType == HardwareType.GpuAmd)
                     {
                         foreach (var sensor in hardware.Sensors)
                         {
@@ -225,7 +229,7 @@ namespace ConsoleApp1
                                     "\nID_5  GPU 显存占用: " + gpuRamLoad.ToString() + " %\n"+
                                     "\nID_6  GPU 温度: " + gpuTemperature.ToString() + " C\n"+
                                     "\n配置的数据类型: [" + _sendType_1.ToString() + "] / ["+ _sendType_2.ToString() + "] \n"+
-                                    "\n----------------OpenHardwareMonitor------------------\n";
+                                    "\n----------------LibreHardwareMonitor------------------\n";
                 Console.WriteLine(writeLine);
                 Esp32Connected(sendStr2.ToString() + "," + sendStr1.ToString());
 
@@ -264,9 +268,9 @@ namespace ConsoleApp1
         {
             //初始化OpenHardwareMonitorLib
             computer = new Computer();
-            computer.CPUEnabled = true;
-            computer.RAMEnabled = true;
-            computer.GPUEnabled = true;
+            computer.IsCpuEnabled = true;
+            computer.IsMemoryEnabled = true;
+            computer.IsGpuEnabled = true;
             computer.Open();
 
             if (isWiredWireless)
